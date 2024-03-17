@@ -197,3 +197,359 @@ printf ("%s",postfix) ;
 
 }
 ______________________________
+
+pg 5
+
+#include <stdio.h>void tower(int n, int source, int temp, int destination) {
+if (n == 0)
+return;
+tower(n - 1, source, destination, temp);
+printf("\nMove disc %d from %c to %c", n, source, destination);
+tower(n - 1, temp, source, destination);
+}
+void main() {
+int n;
+printf("\nEnter the number of discs: \n");
+scanf("%d", & n);
+tower(n, 'A', 'B', 'C');
+printf("\n\nTotal Number of moves are: %d", (int) pow(2, n) - 1);
+}
+_____<<>>______________
+
+pg 6
+
+#include <stdio.h>
+#include <stdlib.h>
+#define max 5
+int q[max],f=-1,r=-1;
+void ins()
+{
+    if(f==(r+1)%max)
+        printf("\nQueue overflow");
+    else
+    {
+        if(f==-1)
+            f++;
+        r=(r+1)%max;
+        printf("\nEnter element to be inserted:");
+        scanf("%d",&q[r]);
+    }
+}
+void del()
+{
+    if(r==-1)
+        printf("\nQueue underflow");
+    else
+    {
+        printf("\nElemnt deleted is:%d",q[f]);
+        if(f==r)
+            f=r=-1;
+        else
+            f=(f+1)%max;
+    }
+}
+void disp()
+{
+    if(f==-1)
+        printf("\nQueue empty");
+    else
+    {
+        int i;
+        printf("\nQueue elements are:\n");
+        for(i=f;i!=r;i=(i+1)%max)
+            printf("%d\t",q[i]);
+        printf("%d",q[i]);
+        printf("\nFront is at:%d\nRear is at:%d",q[f],q[r]);
+    }
+}
+int main()
+{
+    printf("\nCircular Queue operations");
+    printf("\n1.Insert");
+    printf("\n2.Delete");
+    printf("\n3.Display");
+    printf("\n4.Exit");
+    int ch;
+    do{
+        printf("\nEnter choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:ins();break;
+            case 2:del();break;
+            case 3:disp();break;
+            case 4:exit(0);
+            default:printf("\nInvalid choice...!");
+        }
+   }while(1);
+    return 0;
+
+}
+_________________________<<<>>>>>>>
+pg- 7
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+int count=0;
+
+struct node
+
+{
+
+int sem;
+
+long int phno;
+
+char name[20], branch[10], usn[20];
+
+struct node *next;
+
+}*first=NULL,*last=NULL,*temp=NULL, *temp1;
+
+void create()
+
+{
+
+int sem;
+
+long int phno;
+
+char name[20],branch[10],usn[20];
+
+temp=(struct node*)malloc(sizeof(struct node));
+
+printf("\n Enter USN, NAME, BRANCH, SEMESTER, PHNUM of student : ");
+
+scanf("%s %s %s %d %ld", usn, name,branch, &sem,&phno);
+
+strcpy(temp->usn,usn);
+
+strcpy(temp->name,name);
+
+strcpy(temp->branch,branch);
+
+temp->sem = sem;
+
+temp->phno = phno;
+
+temp->next=NULL;
+
+count++;
+
+}
+
+void insert_atfirst()
+
+{
+
+if (first == NULL)
+
+{
+
+create();
+
+first = temp;
+
+last = first;
+
+}
+
+else
+
+{
+
+create();
+
+temp->next = first;
+printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp-
+
+>phno );
+
+free(temp);
+
+first=NULL;
+
+}
+
+else
+
+/* If more than one node in the List */
+
+{
+
+while(temp->next!=last)
+
+temp=temp->next;
+
+printf("%s %s %s %d %ld\n", last->usn, last->name,last->branch, last->sem, last->phno );
+
+free(last);
+
+temp->next=NULL;
+
+last=temp;
+
+}
+
+count--;
+
+}
+
+void delete_front()
+
+{
+
+struct node *temp;
+
+temp=first;
+
+if(first==NULL)
+
+/* List is Empty */
+
+{
+
+printf("List is Empty\n");
+
+return;
+
+}
+
+if(temp->next==NULL) /* If only there is one node in the List */
+
+{
+
+printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp->phno );
+
+free(temp);
+
+first=NULL;
+
+}
+
+else
+
+/* If more than one node in the List */
+
+{
+
+first=temp->next;
+
+printf("%s %s %s %d %ld", temp->usn, temp->name,temp->branch,temp->sem, temp-
+
+>phno );
+
+free(temp);
+
+}
+
+count--;
+
+}
+
+void main()
+
+{
+
+int ch,n,i;
+
+first=NULL;
+first = temp;
+void display()
+
+{
+
+temp = first;
+
+if(temp == NULL)
+
+{
+
+printf("List is Empty\n");
+
+return;
+
+}
+
+printf("\n Linked list elements from begining : \n");
+
+while (temp != NULL)
+
+{
+
+printf("%d %s %s %s %f %ld\n", temp->ssn, temp->name,temp->dept,temp->desg,temp-
+
+>sal, temp->phno );
+
+temp = temp->next;
+
+}
+
+printf(" No of employees = %d", count);
+
+}
+
+void insert_front()
+
+{
+
+if (first == NULL)
+
+{
+
+create();
+
+first = temp;
+
+last = first;
+
+}
+
+else
+
+{
+
+create();
+
+temp->next = first;
+
+first->prev = temp;
+
+first = temp;
+
+}
+
+}
+
+void delete_front()
+
+{
+
+struct node *cur=first;
+
+if(first == NULL) /* If the List is Empty */
+
+{
+
+printf("List is Empty\n");
+
+return;
+
+}
+
+if(first->next == NULL) /*If there is only one node in the List */
+
+{
+
+printf("%d %s %s %s %f %ld\n", first->ssn, first->name,first->dept, first->desg,first-
+
+>sal,first->phno );
+
+free(first);
+
+first = NULL;
+
+}
