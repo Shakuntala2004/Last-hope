@@ -287,269 +287,182 @@ int main()
 }
 _________________________<<<>>>>>>>
 pg- 7
-#include<stdio.h>
+ 
 
-#include<stdlib.h>
+_______________>><<>____________
+
+pg 8
 
 #include<string.h>
-
 int count=0;
-
 struct node
-
 {
-
-int sem;
-
-long int phno;
-
-char name[20], branch[10], usn[20];
-
+struct node *prev;
+int ssn,phno;
+float sal;
+char name[20],dept[10],desg[20];
 struct node *next;
-
-}*first=NULL,*last=NULL,*temp=NULL, *temp1;
-
+}*h,*temp,*temp1,*temp2,*temp4;
 void create()
-
 {
-
-int sem;
-
-long int phno;
-
-char name[20],branch[10],usn[20];
-
-temp=(struct node*)malloc(sizeof(struct node));
-
-printf("\n Enter USN, NAME, BRANCH, SEMESTER, PHNUM of student : ");
-
-scanf("%s %s %s %d %ld", usn, name,branch, &sem,&phno);
-
-strcpy(temp->usn,usn);
-
-strcpy(temp->name,name);
-
-strcpy(temp->branch,branch);
-
-temp->sem = sem;
-
-temp->phno = phno;
-
-temp->next=NULL;
-
-count++;
-
+int ssn,phno;
+float sal;
+char name[20],dept[10],desg[20];
+ temp =(struct node *)malloc(sizeof(struct node));
+ temp->prev = NULL;
+ temp->next = NULL;
+ printf("\n Enter ssn,name,department, designation, salary and phno of employee : ");
+ scanf("%d %s %s %s %f %d", &ssn, name,dept,desg,&sal, &phno);
+ temp->ssn = ssn;
+ strcpy(temp->name,name);
+ strcpy(temp->dept,dept);
+ strcpy(temp->desg,desg);
+ temp->sal = sal;
+ temp->phno = phno;
+ count++;
 }
-
-void insert_atfirst()
-
+void insertbeg()
 {
-
-if (first == NULL)
-
-{
-
+if (h == NULL)
+ {
 create();
-
-first = temp;
-
-last = first;
-
-}
-
+ h = temp;
+ temp1 = h;
+ }
 else
-
-{
-
-create();
-
-temp->next = first;
-printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp-
-
->phno );
-
-free(temp);
-
-first=NULL;
-
+ {
+ create();
+ temp->next = h;
+ h->prev = temp;
+ h = temp;
+ }
 }
-
+void insertend()
+{
+if(h==NULL)
+ {
+ create();
+ h = temp;
+ temp1 = h;
+ }
 else
-
-/* If more than one node in the List */
-
-{
-
-while(temp->next!=last)
-
-temp=temp->next;
-
-printf("%s %s %s %d %ld\n", last->usn, last->name,last->branch, last->sem, last->phno );
-
-free(last);
-
-temp->next=NULL;
-
-last=temp;
-
+ {
+ create();
+ temp1->next = temp;
+ temp->prev = temp1;
+ temp1 = temp;
+ }
 }
-
-count--;
-
-}
-
-void delete_front()
-
+void displaybeg()
 {
-
+ temp2 =h;
+if(temp2 == NULL)
+ {
+ printf("List empty to display \n");
+ return;
+ }
+ printf("\n Linked list elements from begining : \n");
+while (temp2!= NULL)
+ {
+ printf("%d %s %s %s %f %d\n", temp2->ssn, temp2->name,temp2->dept,
+ temp2->desg,temp2->sal, temp2->phno );
+ temp2 = temp2->next; 
+}
+ printf(" No of employees = %d ", count);
+}
+int deleteend()
+{
 struct node *temp;
-
-temp=first;
-
-if(first==NULL)
-
-/* List is Empty */
-
-{
-
-printf("List is Empty\n");
-
-return;
-
-}
-
-if(temp->next==NULL) /* If only there is one node in the List */
-
-{
-
-printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp->phno );
-
-free(temp);
-
-first=NULL;
-
-}
-
+ temp=h;
+if(temp->next==NULL)
+ {
+ free(temp);
+ h=NULL;
+ return 0;
+ }
 else
-
-/* If more than one node in the List */
-
+ {
+ temp2=temp1->prev;
+ temp2->next=NULL;
+ printf("%d %s %s %s %f %d\n", temp1->ssn, temp1->name,temp1->dept,
+ temp1->desg,temp1->sal, temp1->phno );
+ free(temp1);
+ }
+ count--;
+return 0;
+}
+int deletebeg()
 {
-
-first=temp->next;
-
-printf("%s %s %s %d %ld", temp->usn, temp->name,temp->branch,temp->sem, temp-
-
->phno );
-
-free(temp);
-
+struct node *temp;
+ temp=h;
+if(temp->next==NULL)
+ {
+ free(temp);
+ h=NULL;
+ }
+else
+ {
+ h=h->next;
+ printf("%d %s %s %s %f %d", temp->ssn, temp->name,temp->dept,
+ temp->desg,temp->sal, temp->phno );
+ free(temp);
+ }
+ count--;
+return 0; 
 }
-
-count--;
-
-}
-
 void main()
-
 {
-
 int ch,n,i;
-
-first=NULL;
-first = temp;
-void display()
-
-{
-
-temp = first;
-
-if(temp == NULL)
-
-{
-
-printf("List is Empty\n");
-
-return;
-
+ h=NULL;
+ temp = temp1 = NULL;
+ printf("-----------------MENU--------------------\n");
+ printf("\n 1 - create a DLL of n emp");
+ printf("\n 2 - Display from beginning");
+ printf("\n 3 - Insert at end");
+ printf("\n 4 - delete at end");
+ printf("\n 5 - Insert at beg");
+ printf("\n 6 - delete at beg");
+ printf("\n 7 - exit\n");
+ printf("------------------------------------------\n");
+while (1)
+ {
+ printf("\n Enter choice : ");
+ scanf("%d", &ch);
+ switch (ch)
+ {
+ case 1:
+ printf("\n Enter no of employees : ");
+ scanf("%d", &n);
+ for(i=0;i<n;i++)
+ insertend();
+ break;
+ case 2:
+ displaybeg();
+ break;
+ case 3:
+ insertend();
+ break;
+ case 4:
+ deleteend();
+ break;
+ case 5:
+ insertbeg();
+ break;
+ case 6:
+ deletebeg();
+ break;
+ case 7:
+ exit(0);
+ default: 
+printf("wrong choice\n");
+ }
+ }
 }
 
-printf("\n Linked list elements from begining : \n");
+----______________<>><_______________
 
-while (temp != NULL)
+pg 9 
 
-{
 
-printf("%d %s %s %s %f %ld\n", temp->ssn, temp->name,temp->dept,temp->desg,temp-
 
->sal, temp->phno );
 
-temp = temp->next;
-
-}
-
-printf(" No of employees = %d", count);
-
-}
-
-void insert_front()
-
-{
-
-if (first == NULL)
-
-{
-
-create();
-
-first = temp;
-
-last = first;
-
-}
-
-else
-
-{
-
-create();
-
-temp->next = first;
-
-first->prev = temp;
-
-first = temp;
-
-}
-
-}
-
-void delete_front()
-
-{
-
-struct node *cur=first;
-
-if(first == NULL) /* If the List is Empty */
-
-{
-
-printf("List is Empty\n");
-
-return;
-
-}
-
-if(first->next == NULL) /*If there is only one node in the List */
-
-{
-
-printf("%d %s %s %s %f %ld\n", first->ssn, first->name,first->dept, first->desg,first-
-
->sal,first->phno );
-
-free(first);
-
-first = NULL;
-
-}
