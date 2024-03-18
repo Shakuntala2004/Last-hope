@@ -1,5 +1,15 @@
 # Last-hope
+
+
+pg 1
+
+
+
+
+
+-_________________<<<<___________
 pg-2
+
 #include<stdio.h>
 
 char str[50], pat[20], rep[20], res[50];
@@ -44,6 +54,7 @@ void main() {
 _________________<<<<<<_
 
 pg - 3
+
 #include <stdio.h>
 #include <stdlib.h>
 int s[5],top=-1;
@@ -200,6 +211,12 @@ ______________________________
 
 pg 5
 
+a)
+
+
+
+b)
+
 #include <stdio.h>void tower(int n, int source, int temp, int destination) {
 if (n == 0)
 return;
@@ -286,7 +303,352 @@ int main()
 
 }
 _________________________<<<>>>>>>>
+
+
 pg- 7
+
+#include<stdio.h>
+
+#include<stdlib.h>
+
+#include<string.h>
+
+int count=0;
+
+struct node
+
+{
+
+int sem;
+
+long int phno;
+
+char name[20], branch[10], usn[20];
+
+struct node *next;
+
+}*first=NULL,*last=NULL,*temp=NULL, *temp1;
+
+void create()
+
+{
+
+int sem;
+
+long int phno;
+
+char name[20],branch[10],usn[20];
+
+temp=(struct node*)malloc(sizeof(struct node));
+
+printf("\n Enter USN, NAME, BRANCH, SEMESTER, PHNUM of student : ");
+
+scanf("%s %s %s %d %ld", usn, name,branch, &sem,&phno);
+
+strcpy(temp->usn,usn);
+
+strcpy(temp->name,name);
+
+strcpy(temp->branch,branch);
+
+temp->sem = sem;
+
+temp->phno = phno;
+
+temp->next=NULL;
+
+count++;
+
+}
+
+void insert_atfirst()
+
+{
+
+if (first == NULL)
+
+{
+
+create();
+
+first = temp;
+
+last = first;
+
+}
+
+else
+
+{
+
+create();
+
+temp->next = first;
+first = temp;
+}
+
+}
+
+void insert_atlast()
+
+{
+
+if(first==NULL)
+
+{
+
+create();
+
+first = temp;
+
+last = first;
+
+}
+
+else
+
+{
+
+create();
+
+last->next = temp;
+
+last = temp;
+
+}
+
+}
+
+void display()
+
+{
+
+temp1=first;
+
+if(temp1 == NULL)
+
+{
+
+printf("List empty to display \n");
+
+return;
+
+}
+
+printf("\n Linked list elements from begining : \n");
+
+printf("USN\t NAME\t BRANCH\t SEMESTER\t PH.NUM\n");
+
+while (temp1!= NULL)
+
+{
+
+printf("%s\t %s\t %s\t %d\t\t %ld\n", temp1->usn, temp1->name,temp1->branch,temp1-
+
+>sem,temp1->phno);
+
+temp1 = temp1->next;
+
+}
+
+printf(" No of students = %d ", count);
+
+}
+
+void delete_end()
+
+{
+
+struct node *temp;
+
+temp=first;
+
+if(first==NULL)
+
+/* List is Empty */
+
+{
+
+printf("List is Empty\n");
+
+return;
+
+}
+
+if(temp->next==NULL)
+
+/* If only there is one node in the List */
+
+{
+printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp-
+
+>phno );
+
+free(temp);
+
+first=NULL;
+
+}
+
+else
+
+/* If more than one node in the List */
+
+{
+
+while(temp->next!=last)
+
+temp=temp->next;
+
+printf("%s %s %s %d %ld\n", last->usn, last->name,last->branch, last->sem, last->phno );
+
+free(last);
+
+temp->next=NULL;
+
+last=temp;
+
+}
+
+count--;
+
+}
+
+void delete_front()
+
+{
+
+struct node *temp;
+
+temp=first;
+
+if(first==NULL)
+
+/* List is Empty */
+
+{
+
+printf("List is Empty\n");
+
+return;
+
+}
+
+if(temp->next==NULL) /* If only there is one node in the List */
+
+{
+
+printf("%s %s %s %d %ld\n", temp->usn, temp->name,temp->branch, temp->sem, temp-
+
+>phno );
+
+free(temp);
+
+first=NULL;
+
+}
+
+else
+
+/* If more than one node in the List */
+
+{
+
+first=temp->next;
+
+printf("%s %s %s %d %ld", temp->usn, temp->name,temp->branch,temp->sem, temp-
+
+>phno );
+
+free(temp);
+
+}
+
+count--;
+
+}
+
+void main()
+
+{
+
+int ch,n,i;
+
+first=NULL;
+
+temp = temp1 = NULL;
+
+printf("-----------------MENU----------------------\n");
+
+printf("\n 1 Create a SLL of n Employees");
+
+printf("\n 2 - Display from beginning");
+
+printf("\n 3 - Insert at end");
+
+printf("\n 4 - delete at end");
+
+printf("\n 5 - Insert at beg");
+
+printf("\n 6 - delete at beg");
+
+printf("\n 7 - exit\n");
+
+printf("-------------------------------------------\n");
+
+while (1)
+
+{
+
+printf("\n Enter choice : ");
+
+scanf("%d", &ch);
+
+switch (ch)
+
+{
+
+case 1: printf("\n Enter no of students : ");
+
+scanf("%d", &n);
+
+for(i=0;i<n;i++)
+
+insert_atfirst();
+
+break;
+
+case 2: display();
+
+break;
+
+case 3: insert_atlast();
+
+break;
+
+case 4: delete_end();
+
+break;
+
+case 5: insert_atfirst();
+
+break;
+
+case 6: delete_front();
+
+break;
+
+case 7: exit(0);
+
+default:printf("Wrong Choice\n");
+
+}
+
+}
+
+}
+
+
  
 
 _______________>><<>____________
@@ -462,6 +824,567 @@ printf("wrong choice\n");
 ----______________<>><_______________
 
 pg 9 
+
+#include<stdio.h>
+
+#include<math.h>
+
+#include<stdlib.h>
+
+struct node
+
+{
+
+int cf, px, py, pz;
+
+int flag;
+
+struct node *link;
+
+};
+
+typedef struct node NODE;
+
+NODE* getnode()
+
+{
+
+NODE *x;
+
+x = (NODE*)malloc(sizeof(NODE));
+
+if(x == NULL)
+
+{
+
+printf("Insufficient memory\n");
+
+
+exit(0);
+
+}
+return x;
+
+}
+
+void display(NODE *head)
+
+{
+
+NODE *temp;
+
+if(head->link == head)
+
+{
+
+printf("Polynomial does not exist\n");
+
+return;
+
+}
+
+temp = head->link;
+
+printf("\n");
+
+while(temp != head)
+
+{
+
+printf("%d x^%d y^%d z^%d",temp->cf,temp->px,temp->py,temp->pz);
+
+if(temp->link != head)
+
+printf(" + ");
+
+temp = temp->link;
+
+}
+
+printf("\n");
+
+}
+
+NODE* insert_rear(int cf,int x,int y,int z,NODE *head)
+
+{
+
+NODE *temp, *cur;
+
+temp = getnode();
+
+temp->cf = cf;
+
+temp->px = x;
+
+temp->py = y;
+
+temp->pz = z;
+
+cur = head->link;
+
+while(cur->link != head)
+
+cur = cur->link;
+
+cur->link = temp;
+
+temp->link = head;
+
+return head;
+
+}
+
+NODE* read_poly(NODE *head)
+
+{
+
+int px, py, pz, cf, ch;
+
+printf("\nEnter coeff: ");
+
+scanf("%d",&cf);
+
+printf("\nEnter x, y, z powers(0-indiacate NO term): ");
+
+scanf("%d%d%d", &px, &py, &pz);
+
+head = insert_rear(cf,px,py,pz,head);
+
+printf("\nIf you wish to continue press 1 otherwise 0: ");
+
+scanf("%d", &ch);
+
+while(ch != 0)
+
+{
+ printf("\nEnter coeff: ");
+
+scanf("%d",&cf);
+
+printf("\nEnter x, y, z powers(0-indiacate NO term): ");
+
+scanf("%d%d%d",&px, &py, &pz);
+
+head = insert_rear(cf,px,py,pz,head);
+
+printf("\nIf you wish to continue press 1 otherwise 0: ");
+
+scanf("%d", &ch);
+
+}
+
+return head;
+
+}
+
+NODE* add_poly(NODE *h1,NODE *h2,NODE *h3)
+
+{
+
+NODE *p1, *p2;
+
+int cf;
+
+p1 = h1->link;
+
+while(p1 != h1)
+
+{
+
+p2=h2->link;
+
+while(p2 != h2)
+
+{
+
+if(p1->px == p2->px && p1->py == p2->py && p1->pz == p2->pz)
+
+break;
+
+p2 = p2->link;
+
+}
+
+if(p2 != h2)
+
+{
+
+cf = p1->cf + p2->cf;
+
+p2->flag = 1;
+
+if(cf != 0)
+
+h3 = insert_rear(cf,p1->px,p1->py,p1->pz,h3);
+
+}
+
+else
+
+h3 = insert_rear(p1->cf,p1->px,p1->py,p1->pz,h3);
+
+p1 = p1->link;
+
+}
+
+p2 = h2->link;
+
+while(p2 != h2)
+
+{
+
+if(p2->flag == 0)
+
+h3 = insert_rear(p2->cf,p2->px,p2->py,p2->pz,h3);
+
+p2 = p2->link;
+
+}
+
+return h3;
+
+}
+
+void evaluate(NODE *head)
+
+{
+
+NODE *h1=head->link;
+
+int x, y, z;
+float result = 0.0;
+
+printf("\nEnter x, y, z, terms to evaluate:\n");
+
+scanf("%d%d%d", &x, &y, &z);
+
+while(h1 != head)
+
+{
+
+result = result + (h1->cf * pow(x,h1->px) * pow(y,h1->py) * pow(z,h1->pz));
+
+h1 = h1->link;
+
+}
+
+printf("\nPolynomial result is: %f", result);
+
+}
+
+void main()
+
+{
+
+NODE *h1, *h2, *h3, *eval;
+
+int ch;
+
+while(1)
+
+{
+
+eval = getnode();
+
+h1 = getnode();
+
+h2 = getnode();
+
+h3 = getnode();
+
+eval->link = eval;
+
+h1->link = h1;
+
+h2->link = h2;
+
+h3->link = h3;
+
+printf("\n\n1.Evaluate polynomial\n2.Add two polynomials\n3.Exit\n");
+
+printf("Enter your choice: ");
+
+scanf("%d", &ch);
+
+switch(ch)
+
+{
+
+case 1: printf("\nEnter polynomial to evaluate:\n");
+
+eval = read_poly(eval);
+
+display(eval);
+
+evaluate(eval);
+
+free(eval);
+
+break;
+
+case 2: printf("\nEnter the first polynomial: ");
+
+h1 = read_poly(h1);
+
+printf("Flag = %d\n",h1->flag);
+
+printf("\nEnter the second polynomial: ");
+
+h2 = read_poly(h2);
+
+h3 = add_poly(h1,h2,h3);
+
+printf("\nFirst polynomial is: ");
+
+display(h1);
+
+printf("\nSecond polynomial is: ");
+
+display(h2);
+
+printf("\nThe sum of 2 polynomials is: ");
+
+display(h3);
+
+free(h1);
+free(h2); 
+
+free(h3);
+
+break;
+
+case 3: exit(0);
+
+break;
+
+default:printf("
+
+\nInvalid entry");
+
+}
+
+}
+
+}
+
+____________<<<<<<_________<<<<__
+
+
+pg 10
+
+
+#include <stdio.h>
+
+#include <stdlib.h>
+
+struct BST
+
+{
+
+int data;
+
+struct BST *left;
+
+struct BST *right;
+
+};
+
+typedef struct BST NODE;
+
+NODE* createtree(NODE *root, int data)
+
+{
+
+if (root == NULL)
+
+{
+
+NODE *temp;
+
+temp = (NODE*) malloc (sizeof(NODE));
+
+temp->data = data;
+
+temp->left = temp->right = NULL;
+
+return temp;
+
+}
+
+if (data < (root->data))
+
+root->left = createtree(root->left, data);
+
+else if (data > root->data)
+
+root -> right = createtree(root->right, data);
+
+return root;
+
+}
+
+void inorder(NODE *root)
+
+{
+
+if(root != NULL)
+
+{
+
+inorder(root->left);
+
+printf("%d\t", root->data);
+
+inorder(root->right);
+}
+
+void preorder(NODE *root)
+
+{
+
+if(root != NULL)
+
+{
+
+printf("%d\t", root->data);
+
+preorder(root->left);
+
+preorder(root->right);
+
+}
+
+}
+
+void postorder(NODE *root)
+
+{
+
+if(root != NULL)
+
+{
+
+postorder(root->left);
+
+postorder(root->right);
+
+printf("%d\t", root->data);
+
+}
+
+}
+
+NODE *search(NODE *root, int data)
+
+{
+
+if(root == NULL)
+
+printf("\nElement not found");
+
+else if(data < root->data)
+
+root->left = search(root->left, data);
+
+else if(data > root->data)
+
+root->right = search(root->right, data);
+
+else
+
+printf("\nElement found is: %d", root->data);
+
+return root;
+
+}
+
+void main()
+
+{
+
+int data, ch, i, n;
+
+NODE *root = NULL;
+
+while (1)
+
+{
+
+printf("\n1.Creation of Binary Search Tree");
+
+printf("\n2.Inorder\n3.Preorder\n4.Postorder\n5.Search\n6.Exit");
+
+printf("\nEnter your choice: ");
+
+scanf("%d", &ch);
+
+switch (ch)
+
+{
+
+case 1: printf("\nEnter N value: " );
+
+scanf("%d", &n);
+
+printf("\nEnter the values to create BST like(6,9,5,2,8,15,24,14,7,8,5,2)\n");
+
+for(i=0; i<n; i++)
+
+
+{
+
+scanf("%d", &data);
+
+root = createtree(root, data);
+
+}
+
+break;
+
+case 2: printf("\nInorder Traversal: \n");
+
+inorder(root);
+
+break;
+
+case 3: printf("\nPreorder Traversal: \n");
+
+preorder(root);
+
+break;
+
+case 4: printf("\nPostorder Traversal: \n");
+
+postorder(root);
+
+break;
+
+case 5: printf("\nEnter the element to Search: ");
+
+scanf("%d", &data);
+
+root=search(root, data);
+
+break;
+
+case 6: exit(0);
+
+default: printf("\nWrong Option");
+
+break;
+
+}
+
+}
+
+}
+
+
+
+
+
+
 
 
 
